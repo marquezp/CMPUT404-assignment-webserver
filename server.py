@@ -43,13 +43,10 @@ class MyWebServer(socketserver.BaseRequestHandler):
             file_type = path_to_file.split(".")[1]
         except:
             return None
-        match file_type:
-            case "css":
-                content_type = "text/css; charset=utf-8\r\n"
-            case "html":
-                content_type = "text/html; charset=utf-8\r\n"
-
-        return content_type
+        if file_type == "css":
+            return "text/css; charset=utf-8\r\n"
+        else:
+            return "text/html; charset=utf-8\r\n"
     
     # returns the content of the file in the given path
     def get_content(self, path_to_file):
