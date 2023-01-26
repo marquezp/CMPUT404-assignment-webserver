@@ -54,7 +54,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
 
     def handle(self):
         self.data = self.request.recv(1024).strip()
-        print ("Got a request of: %s\n" % self.data)
+        #print ("Got a request of: %s\n" % self.data)
 
         # get the HTTP method, protocol version, and path for the request
         status_line = self.data.decode('utf-8').split("\r\n")[0]
