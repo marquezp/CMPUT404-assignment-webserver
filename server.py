@@ -31,15 +31,11 @@ from os import path
 class MyWebServer(socketserver.BaseRequestHandler):
     # checks for any backwards paths ../../
     def check_backwards(self, path_to_file):
-        if ".." in (path_to_file.split("/")):
-            return False
-        return True
+        return (".." in (path_to_file.split("/")))
 
     # is the file valid
     def does_file_exist(self, path_to_file):
-        if path.exists("./www"+ path_to_file):
-            return True
-        return False
+        return (path.exists("./www"+ path_to_file))
 
     # returns the file extension type
     def get_content_type(self, path_to_file):
@@ -69,7 +65,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
 
         # only accept GET requests
         if method == "GET":
-            if self.does_file_exist(path_to_file) and self.check_backwards(path_to_file):
+            if self.does_file_exist(path_to_file) and not self.check_backwards(path_to_file):
                 # get file type and content
                 response = version + " 200 OK\r\n"
                 content_type = self.get_content_type(path_to_file)
